@@ -346,6 +346,37 @@
                 </div>
         
             </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const dropdown = document.querySelector(".dropdown");
+                    const dropdownBtn = document.querySelector(".dropbtn");
+                    const dropdownContent = document.querySelector(".dropdown-content");
+            
+                    // Toggle dropdown on button click
+                    dropdownBtn.addEventListener("click", function () {
+                        const isExpanded = dropdownBtn.getAttribute("aria-expanded") === "true";
+                        dropdownBtn.setAttribute("aria-expanded", !isExpanded);
+                        dropdownContent.style.display = isExpanded ? "none" : "block";
+                    });
+            
+                    // Close dropdown when clicking outside
+                    document.addEventListener("click", function (event) {
+                        if (!dropdown.contains(event.target)) {
+                            dropdownContent.style.display = "none";
+                            dropdownBtn.setAttribute("aria-expanded", "false");
+                        }
+                    });
+            
+                    // Close dropdown when a menu item is clicked
+                    dropdownContent.querySelectorAll("a").forEach(item => {
+                        item.addEventListener("click", function () {
+                            dropdownContent.style.display = "none";
+                            dropdownBtn.setAttribute("aria-expanded", "false");
+                        });
+                    });
+                });
+            </script>
+            
         
             <script>
                 const faqQuestions = document.querySelectorAll('.faq-question');
